@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/contact.css";
+import toast from "react-hot-toast";
 
 const Contact = () => {
   const [formDetails, setFormDetails] = useState({
@@ -10,24 +11,31 @@ const Contact = () => {
 
   const inputChange = (e) => {
     const { name, value } = e.target;
-    return setFormDetails({
+    setFormDetails({
       ...formDetails,
       [name]: value,
     });
   };
 
+  const formSubmit = (e) => {
+    e.preventDefault();
+
+    const { name, email, message } = formDetails;
+
+    if (!name || !email || !message) {
+      return toast.error("All fields are required");
+    }
+    setTimeout(() => {
+      toast.success("Form submitted successfully!");
+      setFormDetails({ name: "", email: "", message: "" });
+    }, 1000);
+  };
+
   return (
-    <section
-      className="register-section flex-center"
-      id="contact"
-    >
+    <section className="register-section flex-center" id="contact">
       <div className="contact-container flex-center contact">
         <h2 className="form-heading">Contact Us</h2>
-        <form
-          method="POST"
-          action={`https://formspree.io/f/${process.env.REACT_FORMIK_SECRET}`}
-          className="register-form "
-        >
+        <form className="register-form" onSubmit={formSubmit}>
           <input
             type="text"
             name="name"
@@ -45,7 +53,6 @@ const Contact = () => {
             onChange={inputChange}
           />
           <textarea
-            type="text"
             name="message"
             className="form-input"
             placeholder="Enter your message"
@@ -55,11 +62,8 @@ const Contact = () => {
             cols="12"
           ></textarea>
 
-          <button
-            type="submit"
-            className="btn form-btn"
-          >
-            send
+          <button type="submit" className="btn form-btn">
+            Send
           </button>
         </form>
       </div>
