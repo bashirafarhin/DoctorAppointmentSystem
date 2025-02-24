@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Doctor = require("../models/doctorModel");
 const Appointment = require("../models/appointmentModel");
-const nodemailer = require("nodemailer"); 
+const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const getuser = async (req, res) => {

@@ -1,6 +1,7 @@
 const Appointment = require("../models/appointmentModel");
 const Notification = require("../models/notificationModel");
 const User = require("../models/userModel");
+const Doctor = require("../models/doctorModel");
 
 const getallappointments = async (req, res) => {
   try {
