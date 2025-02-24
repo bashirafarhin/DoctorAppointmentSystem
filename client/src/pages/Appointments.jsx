@@ -78,7 +78,6 @@ const Appointments = () => {
       toast.success("Appointment completed successfully.");
       getAllAppoint();
     } catch (error) {
-      console.error("Error completing appointment:", error);
       toast.error("Failed to complete appointment. Please try again.");
     }
   };

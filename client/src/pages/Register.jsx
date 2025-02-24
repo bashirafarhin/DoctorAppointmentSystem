@@ -130,7 +130,7 @@ function Register() {
       if (error.response) {
         toast.error(error.response.data || "Something went wrong!");
       } else if (error.request) {
-        toast.error("No response from server. Please try again later.");
+        toast.error("Please try again later.");
       } else {
         toast.error("An unexpected error occurred.");
       }
@@ -176,6 +176,7 @@ function Register() {
             <input
               type="file"
               onChange={(e) => onUpload(e.target.files[0])}
+              placeholder="Choose Avatar"
               name="profile-pic"
               id="profile-pic"
               className="form-input"
