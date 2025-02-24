@@ -8,7 +8,6 @@ import Home from "../components/Home";
 import Aprofile from "../components/Aprofile";
 
 const Dashboard = (props) => {
-  console.log(props);
   const { type } = props;
   return (
     <>

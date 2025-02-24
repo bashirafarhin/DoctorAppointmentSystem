@@ -32,7 +32,6 @@ function ResetPassword() {
         toast.error("Failed to reset password. Please try again.");
       }
     } catch (error) {
-      console.error("Error resetting password:", error);
       toast.error("Failed to reset password. Please try again.");
     }
   };

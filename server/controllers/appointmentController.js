@@ -53,7 +53,6 @@ const bookappointment = async (req, res) => {
     const result = await appointment.save();
     return res.status(201).send(result);
   } catch (error) {
-    console.log("error", error);
     res.status(500).send("Unable to book appointment");
   }
 };

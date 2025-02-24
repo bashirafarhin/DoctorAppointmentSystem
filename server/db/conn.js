@@ -12,7 +12,6 @@ const client = mongoose
   })
   .catch((error) => {
     console.log("Error: ", error);
-
     return error;
   });
 

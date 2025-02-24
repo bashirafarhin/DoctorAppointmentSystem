@@ -48,50 +48,95 @@ function Register() {
         .then((data) => setFile(data.url.toString()));
       setLoading(false);
     } else {
-      console.log("Please select an image in jpeg or png format");
       setLoading(false);
       toast.error("Please select an image in jpeg or png format");
     }
   };
 
+  // const formSubmit = async (e) => {
+  //   try {
+  //     e.preventDefault();
+  
+  //     if (loading) return;
+  //     if (file === "") return;
+  //     const { firstname, lastname, email, password, confpassword } = formDetails;
+  //     if (!firstname || !lastname || !email || !password || !confpassword || !selectedRole) {
+  //       return toast.error("Input field should not be empty");
+  //     } else if (firstname.length < 3) {
+  //       return toast.error("First name must be at least 3 characters long");
+  //     } else if (lastname.length < 3) {
+  //       return toast.error("Last name must be at least 3 characters long");
+  //     } else if (password.length < 5) {
+  //       return toast.error("Password must be at least 5 characters long");
+  //     } else if (password !== confpassword) {
+  //       return toast.error("Passwords do not match");
+  //     }
+  
+  //     await toast.promise(
+  //       axios.post("/user/register", {
+  //         firstname,
+  //         lastname,
+  //         email,
+  //         password,
+  //         pic: file,
+  //         role: selectedRole,
+  //       }),
+  //       {
+  //         pending: "Registering user...",
+  //         success: "User registered successfully",
+  //         error: "Unable to register user",
+  //         loading: "Registering user...",
+  //       }
+  //     );
+  //     return navigate("/login");
+  //   } catch (error) {}
+  // };
   const formSubmit = async (e) => {
+    e.preventDefault();
+  
+    if (loading) return;
+    if (file === "") return;
+  
+    const { firstname, lastname, email, password, confpassword } = formDetails;
+    if (!firstname || !lastname || !email || !password || !confpassword || !selectedRole) {
+      return toast.error("Input field should not be empty");
+    } else if (firstname.length < 3) {
+      return toast.error("First name must be at least 3 characters long");
+    } else if (lastname.length < 3) {
+      return toast.error("Last name must be at least 3 characters long");
+    } else if (password.length < 5) {
+      return toast.error("Password must be at least 5 characters long");
+    } else if (password !== confpassword) {
+      return toast.error("Passwords do not match");
+    }
+  
     try {
-      e.preventDefault();
+      toast.loading("Registering user...");
   
-      if (loading) return;
-      if (file === "") return;
-      const { firstname, lastname, email, password, confpassword } = formDetails;
-      if (!firstname || !lastname || !email || !password || !confpassword || !selectedRole) {
-        return toast.error("Input field should not be empty");
-      } else if (firstname.length < 3) {
-        return toast.error("First name must be at least 3 characters long");
-      } else if (lastname.length < 3) {
-        return toast.error("Last name must be at least 3 characters long");
-      } else if (password.length < 5) {
-        return toast.error("Password must be at least 5 characters long");
-      } else if (password !== confpassword) {
-        return toast.error("Passwords do not match");
+      await axios.post("/user/register", {
+        firstname,
+        lastname,
+        email,
+        password,
+        pic: file,
+        role: selectedRole,
+      });
+  
+      toast.dismiss();
+      toast.success("User registered successfully");
+      navigate("/login");
+    } catch (error) {
+      toast.dismiss();  
+      if (error.response) {
+        toast.error(error.response.data || "Something went wrong!");
+      } else if (error.request) {
+        toast.error("No response from server. Please try again later.");
+      } else {
+        toast.error("An unexpected error occurred.");
       }
-  
-      await toast.promise(
-        axios.post("/user/register", {
-          firstname,
-          lastname,
-          email,
-          password,
-          pic: file,
-          role: selectedRole,
-        }),
-        {
-          pending: "Registering user...",
-          success: "User registered successfully",
-          error: "Unable to register user",
-          loading: "Registering user...",
-        }
-      );
-      return navigate("/login");
-    } catch (error) {}
+    }
   };
+  
   
 
   return (
@@ -108,6 +153,7 @@ function Register() {
               placeholder="Enter your first name"
               value={formDetails.firstname}
               onChange={inputChange}
+              required
             />
             <input
               type="text"
@@ -116,6 +162,7 @@ function Register() {
               placeholder="Enter your last name"
               value={formDetails.lastname}
               onChange={inputChange}
+              required
             />
             <input
               type="email"
@@ -124,6 +171,7 @@ function Register() {
               placeholder="Enter your email"
               value={formDetails.email}
               onChange={inputChange}
+              required
             />
             <input
               type="file"
@@ -131,6 +179,7 @@ function Register() {
               name="profile-pic"
               id="profile-pic"
               className="form-input"
+              required
             />
             <input
               type="password"
@@ -139,6 +188,7 @@ function Register() {
               placeholder="Enter your password"
               value={formDetails.password}
               onChange={inputChange}
+              required
             />
             <input
               type="password"
@@ -147,12 +197,14 @@ function Register() {
               placeholder="Confirm your password"
               value={formDetails.confpassword}
               onChange={inputChange}
+              required
             />
             <select
               name="role"
               value={selectedRole}
               onChange={(e) => setSelectedRole(e.target.value)}
               className="form-input"
+              required
             >
               <option value="">Select Role</option>
               <option value="Admin">Admin</option>

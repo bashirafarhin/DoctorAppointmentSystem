@@ -27,43 +27,48 @@ function Login() {
       [name]: value,
     });
   };
+
   const formSubmit = async (e) => {
+    e.preventDefault();
+    const { email, password, role } = formDetails;
+  
+    if (!email || !password) {
+      return toast.error("Email and password are required");
+    } else if (!role) {
+      return toast.error("Please select a role");
+    } else if (role !== "Admin" && role !== "Doctor" && role !== "Patient") {
+      return toast.error("Please select a valid role");
+    } else if (password.length < 5) {
+      return toast.error("Password must be at least 5 characters long");
+    }
+  
     try {
-      e.preventDefault();
-      const { email, password, role } = formDetails;
+      toast.loading("Logging in...");
   
-      if (!email || !password) {
-        return toast.error("Email and password are required");
-      } else if (!role) {
-        return toast.error("Please select a role");
-      } else if (role !== "Admin" && role !== "Doctor" && role !== "Patient") {
-        return toast.error("Please select a valid role");
-      } else if (password.length < 5) {
-        return toast.error("Password must be at least 5 characters long");
-      }
+      const { data } = await axios.post("/user/login", {
+        email,
+        password,
+        role,
+      });
   
-      const { data } = await toast.promise(
-        axios.post("/user/login", {
-          email,
-          password,
-          role,
-        }),
-        
-        {
-          pending: "Logging in...",
-          success: "Login successfully",
-          error: "Unable to login user",
-          loading: "Logging user...",
-        }
-      );
+      toast.dismiss();
+      toast.success("Login successful");
       localStorage.setItem("token", data.token);
       dispatch(setUserInfo(jwt_decode(data.token).userId));
       setUserRole(role);
       getUser(jwt_decode(data.token).userId, role);
     } catch (error) {
-      return error;
+      toast.dismiss();
+      if (error.response) {
+        toast.error(error.response.data || "Invalid credentials!");
+      } else if (error.request) {
+        toast.error("No response from server. Please try again later.");
+      } else {
+        toast.error("An unexpected error occurred.");
+      }
     }
   };
+  
   
 
   const getUser = async (id, role) => {

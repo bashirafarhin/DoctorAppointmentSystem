@@ -63,13 +63,14 @@ const register = async (req, res) => {
     }
     const hashedPass = await bcrypt.hash(req.body.password, 10);
     const user = await User({ ...req.body, password: hashedPass });
-    const result = await user.save();
-    if (!result) {
-      return res.status(500).send("Unable to register user");
-    }
+    await user.save();
+    // if (!result) {
+    //   return res.status(500).send("Unable to register user");
+    // }
     return res.status(201).send("User registered successfully");
   } catch (error) {
-    res.status(500).send("Unable to register user");
+    // res.status(500).send("Unable to register user");
+    res.status(500).send({ message : error.message });
   }
 };
 
@@ -90,9 +91,7 @@ const updateprofile = async (req, res) => {
 };
 const changepassword = async (req, res) => {
   try {
-    console.log(req.body);
     const { userId, currentPassword, newPassword, confirmNewPassword } = req.body;
-    // console.log("Received newPassword:", newPassword); 
     if (newPassword !== confirmNewPassword) {
       return res.status(400).send("Passwords do not match");
     }
@@ -106,19 +105,12 @@ const changepassword = async (req, res) => {
     if (!isPasswordMatch) {
       return res.status(400).send("Incorrect current password");
     }
-
     const saltRounds = 10;
-    // console.log("Using saltRounds:", saltRounds); 
-
     const hashedNewPassword = await bcrypt.hash(newPassword, saltRounds);
-    // console.log("Hashed new password:", hashedNewPassword); 
-
     user.password = hashedNewPassword;
     await user.save();
-
     return res.status(200).send("Password changed successfully");
   } catch (error) {
-    console.error(error);
     return res.status(500).send("Internal Server Error");
   }
 };
@@ -144,13 +136,10 @@ const forgotpassword = async (req, res) => {
   try {
     const { email } = req.body;
     const user = await User.findOne({ email });
-    // console.log(user,email);
     if (!user) {
       return res.status(404).send({ status: "User not found" });
     }
-
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1m" });
-// console.log(token)
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -158,26 +147,20 @@ const forgotpassword = async (req, res) => {
         pass: "qfhv wohg gjtf ikvz", 
       },
     });
-    // console.log(transporter);
-
     const mailOptions = {
       from: "tarun.kumar.csbs25@heritageit.edu.in",
       to: email,
       subject: "Reset Password Link",
       text: `${process.env.CLIENT_URL}/resetpassword/${user._id}/${token}`,
     };
-    // console.log(mailOptions);
-
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        console.log(error);
         return res.status(500).send({ status: "Error sending email" });
       } else {
         return res.status(200).send({ status: "Email sent successfully" });
       }
     });
   } catch (error) {
-    console.error(error);
     return res.status(500).send({ status: "Internal Server Error" });
   }
 };
@@ -186,11 +169,8 @@ const resetpassword = async (req, res) => {
   try {
     const { id, token } = req.params;
     const { password } = req.body;
-    // console.log(token)
-    // console.log(password);
     jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
       if (err) {
-        console.log(err);
         return res.status(400).send({ error: "Invalid or expired token" });
       }
      
@@ -199,12 +179,10 @@ const resetpassword = async (req, res) => {
         await User.findByIdAndUpdate(id, { password: hashedPassword });
         return res.status(200).send({ success: "Password reset successfully" });
       } catch (updateError) {
-        console.error("Error updating password:", updateError);
         return res.status(500).send({ error: "Failed to update password" });
       }
     });
   } catch (error) {
-    console.error(error);
     return res.status(500).send({ error: "Internal Server Error" });
   }
 };

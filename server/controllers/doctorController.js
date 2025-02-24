@@ -111,7 +111,6 @@ const deletedoctor = async (req, res) => {
     });
     return res.send("Doctor deleted successfully");
   } catch (error) {
-    console.log("error", error);
     res.status(500).send("Unable to delete doctor");
   }
 };
