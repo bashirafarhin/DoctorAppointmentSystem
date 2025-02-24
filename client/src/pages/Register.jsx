@@ -57,7 +57,7 @@ function Register() {
     e.preventDefault();
   
     if (loading) return;
-    if (file === "") return;
+    // if (file === "") return;
   
     const { firstname, lastname, email, password, confpassword } = formDetails;
     if (!firstname || !lastname || !email || !password || !confpassword || !selectedRole) {
@@ -74,7 +74,6 @@ function Register() {
   
     try {
       toast.loading("Registering user...");
-  
       await axios.post("/user/register", {
         firstname,
         lastname,
@@ -83,11 +82,11 @@ function Register() {
         pic: file,
         role: selectedRole,
       });
-  
       toast.dismiss();
       toast.success("User registered successfully");
       navigate("/login");
     } catch (error) {
+      console.log(error);
       toast.dismiss();  
       if (error.response) {
         toast.error(error.response.data || "Something went wrong!");

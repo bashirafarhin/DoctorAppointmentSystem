@@ -63,8 +63,8 @@ const register = async (req, res) => {
     }
     // if any attacker tries to enter as admin change the role of attacker to user
     // you can change this if you want to change the admin
-    if(req.body.role = "admin"){
-      req.body.role = "user";
+    if(req.body.role == "Admin"){
+      req.body.role = "Patient";
     }
     const hashedPass = await bcrypt.hash(req.body.password, 10);
     const user = await User({ ...req.body, password: hashedPass });
