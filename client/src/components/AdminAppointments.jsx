@@ -83,7 +83,7 @@ const AdminAppointments = () => {
                     <th>Booking Time</th>
                     <th>Status</th>
 
-                    <th>Action</th>
+                    {/* <th>Action</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -109,7 +109,7 @@ const AdminAppointments = () => {
                         <td>{ele?.createdAt.split("T")[0]}</td>
                         <td>{ele?.updatedAt.split("T")[1].split(".")[0]}</td>
                         <td>{ele?.status}</td>
-                        <td>
+                        {/* <td>
                           <button
                             className={`btn user-btn accept-btn ${
                               ele?.status === "Completed" ? "disable-btn" : ""
@@ -119,7 +119,7 @@ const AdminAppointments = () => {
                           >
                             Complete
                           </button>
-                        </td>
+                        </td> */}
                       </tr>
                     );
                   })}

@@ -15,7 +15,6 @@ const getalldoctors = async (req, res) => {
         })
         .populate("userId");
     }
-
     return res.send(docs);
   } catch (error) {
     res.status(500).send("Unable to get doctors");
@@ -29,7 +28,6 @@ const getnotdoctors = async (req, res) => {
         _id: { $ne: req.locals },
       })
       .populate("userId");
-
     return res.send(docs);
   } catch (error) {
     res.status(500).send("Unable to get non doctors");
@@ -42,10 +40,8 @@ const applyfordoctor = async (req, res) => {
     if (alreadyFound) {
       return res.status(400).send("Application already exists");
     }
-
     const doctor = Doctor({ ...req.body.formDetails, userId: req.locals });
     const result = await doctor.save();
-
     return res.status(201).send("Application submitted successfully");
   } catch (error) {
     res.status(500).send("Unable to submit application");
@@ -58,19 +54,15 @@ const acceptdoctor = async (req, res) => {
       { _id: req.body.id },
       { isDoctor: true, status: "accepted" }
     );
-
     const doctor = await Doctor.findOneAndUpdate(
       { userId: req.body.id },
       { isDoctor: true }
     );
-
     const notification = await Notification({
       userId: req.body.id,
       content: `Congratulations, Your application has been accepted.`,
     });
-
     await notification.save();
-
     return res.status(201).send("Application accepted notification sent");
   } catch (error) {
     res.status(500).send("Error while sending notification");
@@ -84,14 +76,11 @@ const rejectdoctor = async (req, res) => {
       { isDoctor: false, status: "rejected" }
     );
     const delDoc = await Doctor.findOneAndDelete({ userId: req.body.id });
-
     const notification = await Notification({
       userId: req.body.id,
       content: `Sorry, Your application has been rejected.`,
     });
-
     await notification.save();
-
     return res.status(201).send("Application rejection notification sent");
   } catch (error) {
     res.status(500).send("Error while rejecting application");

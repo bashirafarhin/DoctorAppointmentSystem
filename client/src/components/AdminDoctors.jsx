@@ -130,6 +130,7 @@ const AdminDoctors = () => {
                     <th>Specialization</th>
                     <th>Fees</th>
                     <th>Remove</th>
+                    <th>Number Of Appointments</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -161,6 +162,7 @@ const AdminDoctors = () => {
                             Remove
                           </button>
                         </td>
+                        <td>{ele?.numOfAppointments}</td>
                       </tr>
                     );
                   })}

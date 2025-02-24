@@ -49,6 +49,11 @@ const bookappointment = async (req, res) => {
     });
 
     await doctornotification.save();
+  // Increment numOfAppointments for the doctor
+  await Doctor.findOneAndUpdate(
+    { userId: req.body.doctorId }, // Assuming `userId` in `Doctor` references the User model
+    { $inc: { numOfAppointments: 1 } }
+  );
 
     const result = await appointment.save();
     return res.status(201).send(result);

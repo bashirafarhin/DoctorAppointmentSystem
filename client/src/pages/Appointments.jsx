@@ -28,7 +28,6 @@ const Appointments = () => {
       setAppointments(temp);
       dispatch(setLoading(false));
     } catch (error) {
-      console.error("Error fetching appointments:", error);
       toast.error("Failed to fetch appointments. Please try again.");
     }
   };

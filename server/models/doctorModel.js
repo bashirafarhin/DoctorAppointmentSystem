@@ -23,6 +23,10 @@ const schema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    numOfAppointments: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
