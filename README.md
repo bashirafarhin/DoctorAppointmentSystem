@@ -15,7 +15,6 @@ Doctor Appointment System allows patients to book appointments with doctors easi
 You can visit the website at  [DoctorAppointmentSystem](https://bookdoctorappointment-jv18.onrender.com/).
 
 ## Demo
-https://github.com/user-attachments/assets/cd2ce4ff-fe8d-4ed6-8f4e-06f2290add8f
 
 ## Features
 - Authentication using local login
