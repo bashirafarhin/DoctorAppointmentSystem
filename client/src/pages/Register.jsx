@@ -53,44 +53,6 @@ function Register() {
     }
   };
 
-  // const formSubmit = async (e) => {
-  //   try {
-  //     e.preventDefault();
-  
-  //     if (loading) return;
-  //     if (file === "") return;
-  //     const { firstname, lastname, email, password, confpassword } = formDetails;
-  //     if (!firstname || !lastname || !email || !password || !confpassword || !selectedRole) {
-  //       return toast.error("Input field should not be empty");
-  //     } else if (firstname.length < 3) {
-  //       return toast.error("First name must be at least 3 characters long");
-  //     } else if (lastname.length < 3) {
-  //       return toast.error("Last name must be at least 3 characters long");
-  //     } else if (password.length < 5) {
-  //       return toast.error("Password must be at least 5 characters long");
-  //     } else if (password !== confpassword) {
-  //       return toast.error("Passwords do not match");
-  //     }
-  
-  //     await toast.promise(
-  //       axios.post("/user/register", {
-  //         firstname,
-  //         lastname,
-  //         email,
-  //         password,
-  //         pic: file,
-  //         role: selectedRole,
-  //       }),
-  //       {
-  //         pending: "Registering user...",
-  //         success: "User registered successfully",
-  //         error: "Unable to register user",
-  //         loading: "Registering user...",
-  //       }
-  //     );
-  //     return navigate("/login");
-  //   } catch (error) {}
-  // };
   const formSubmit = async (e) => {
     e.preventDefault();
   
@@ -180,7 +142,6 @@ function Register() {
               name="profile-pic"
               id="profile-pic"
               className="form-input"
-              required
             />
             <input
               type="password"
@@ -208,7 +169,6 @@ function Register() {
               required
             >
               <option value="">Select Role</option>
-              <option value="Admin">Admin</option>
               <option value="Doctor">Doctor</option>
               <option value="Patient">Patient</option>
             </select>

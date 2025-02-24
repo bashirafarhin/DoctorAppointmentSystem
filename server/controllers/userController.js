@@ -61,15 +61,16 @@ const register = async (req, res) => {
     if (emailPresent) {
       return res.status(400).send("Email already exists");
     }
+    // if any attacker tries to enter as admin change the role of attacker to user
+    // you can change this if you want to change the admin
+    if(req.body.role = "admin"){
+      req.body.role = "user";
+    }
     const hashedPass = await bcrypt.hash(req.body.password, 10);
     const user = await User({ ...req.body, password: hashedPass });
     await user.save();
-    // if (!result) {
-    //   return res.status(500).send("Unable to register user");
-    // }
     return res.status(201).send("User registered successfully");
   } catch (error) {
-    // res.status(500).send("Unable to register user");
     res.status(500).send({ message : error.message });
   }
 };
@@ -89,6 +90,7 @@ const updateprofile = async (req, res) => {
     res.status(500).send("Unable to update user");
   }
 };
+
 const changepassword = async (req, res) => {
   try {
     const { userId, currentPassword, newPassword, confirmNewPassword } = req.body;

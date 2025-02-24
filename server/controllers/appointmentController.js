@@ -40,9 +40,7 @@ const bookappointment = async (req, res) => {
     });
 
     await usernotification.save();
-
     const user = await User.findById(req.locals);
-
     const doctornotification = Notification({
       userId: req.body.doctorId,
       content: `You have an appointment with ${user.firstname} ${user.lastname} on ${req.body.date} at ${req.body.time} Age: ${user.age} bloodGropu: ${user.bloodGroup} Gender: ${user.gender} Mobile Number:${user.number} Family Diseases ${user.familyDiseases}` ,
@@ -51,10 +49,9 @@ const bookappointment = async (req, res) => {
     await doctornotification.save();
   // Increment numOfAppointments for the doctor
   await Doctor.findOneAndUpdate(
-    { userId: req.body.doctorId }, // Assuming `userId` in `Doctor` references the User model
+    { userId: req.body.doctorId },
     { $inc: { numOfAppointments: 1 } }
   );
-
     const result = await appointment.save();
     return res.status(201).send(result);
   } catch (error) {
