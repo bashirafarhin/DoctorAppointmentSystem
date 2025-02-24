@@ -1,5 +1,4 @@
 import { Navigate } from "react-router-dom";
-import jwtDecode from "jwt-decode";
 
 export const Protected = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -27,19 +26,6 @@ export const Public = ({ children }) => {
   );
 };
 
-// export const Admin = ({ children }) => {
-//   const user = jwtDecode(localStorage.getItem("token"));
-
-//   if (user.isAdmin) {
-//     return children;
-//   }
-//   return (
-//     <Navigate
-//       to={"/"}
-//       replace={true}
-//     ></Navigate>
-//   );
-// };
 export const Admin = ({ children }) => {
   const token = localStorage.getItem("token");
   if (!token) {

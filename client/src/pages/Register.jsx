@@ -38,7 +38,7 @@ function Register() {
     ) {
       const data = new FormData();
       data.append("file", element);
-      data.append("upload_preset", process.env.REACT_APP_CLOUDINARY_PRESET);
+      data.append("upload_preset", process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
       data.append("cloud_name", process.env.REACT_APP_CLOUDINARY_CLOUD_NAME);
       fetch(process.env.REACT_APP_CLOUDINARY_BASE_URL, {
         method: "POST",
@@ -48,6 +48,7 @@ function Register() {
         .then((data) => setFile(data.url.toString()));
       setLoading(false);
     } else {
+      console.log("Please select an image in jpeg or png format");
       setLoading(false);
       toast.error("Please select an image in jpeg or png format");
     }
