@@ -10,17 +10,18 @@ const Hero = () => {
           Your Health, <br />
           Our Responsibility
         </h1>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-          tenetur doloremque molestias repellat minus asperiores in aperiam
-          dolor, quaerat praesentium.
+        <p style={{fontSize: "1.2rem"}}>
+          We believe that quality healthcare should be easily accessible to
+          everyone. Our platform connects patients with experienced doctors,
+          ensuring a seamless appointment booking experience. With a commitment
+          to efficiency and patient care, we strive to make healthcare more
+          convenient, reliable, and stress-free. Whether it’s a routine check-up
+          or a specialized consultation, we are here to simplify your journey
+          toward better health.
         </p>
       </div>
       <div className="hero-img">
-        <img
-          src={image}
-          alt="hero"
-        />
+        <img src={image} alt="hero" />
       </div>
     </section>
   );

@@ -1,10 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-const { Server } = require("socket.io");
 require("dotenv").config();
 require("./db/conn");
-require("./controllers/socket");
 const userRouter = require("./routes/userRoutes");
 const doctorRouter = require("./routes/doctorRoutes");
 const appointRouter = require("./routes/appointRoutes");

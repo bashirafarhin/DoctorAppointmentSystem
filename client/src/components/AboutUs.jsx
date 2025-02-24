@@ -8,20 +8,20 @@ const AboutUs = () => {
         <h2 className="page-heading about-heading">About Us</h2>
         <div className="about">
           <div className="hero-img">
-            <img
-              src={image}
-              alt="hero"
-            />
+            <img src={image} alt="hero" />
           </div>
           <div className="hero-content">
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Quibusdam tenetur doloremque molestias repellat minus asperiores
-              in aperiam dolor, quaerat praesentium. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Voluptatibus, repudiandae! Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Provident
-              quibusdam doloremque ex? Officia atque ab dolore? Tempore totam
-              non ea!
+            <p style={{ fontSize: "1.2rem" }}>
+              Welcome to our Doctor Appointment Booking System, your trusted
+              platform for seamless healthcare access. Our mission is to bridge
+              the gap between patients and healthcare professionals by providing
+              a hassle-free way to book appointments with qualified doctors. We
+              aim to simplify healthcare by offering a user-friendly interface,
+              real-time appointment scheduling, and secure communication between
+              patients and doctors. Whether you need a routine check-up or
+              specialized medical consultation, our system ensures a smooth and
+              efficient experience. Your health is our priority, and we are
+              committed to making quality healthcare accessible to everyone.
             </p>
           </div>
         </div>

@@ -58,7 +58,6 @@ function Login() {
       setUserRole(role);
       getUser(jwt_decode(data.token).userId, role);
     } catch (error) {
-      console.log(error);
       toast.dismiss();
       if (error.response) {
         toast.error(error.response.data || "Invalid credentials!");
