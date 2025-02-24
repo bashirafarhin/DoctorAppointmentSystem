@@ -9,7 +9,7 @@ const appointRouter = require("./routes/appointRoutes");
 const notificationRouter = require("./routes/notificationRouter");
 
 const app = express();
-const port = process.env.PORT || 5015;
+const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
