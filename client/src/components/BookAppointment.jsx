@@ -13,7 +13,6 @@ const BookAppointment = ({ setModalOpen, ele }) => {
     gender:"",
     number: "",
     familyDiseases:"",
-    // prescription:"",
   });
 
   const inputChange = (e) => {
@@ -39,7 +38,6 @@ const BookAppointment = ({ setModalOpen, ele }) => {
             gender: formDetails.gender,
             number:formDetails.number,
             familyDiseases: formDetails.familyDiseases,
-            // prescription: formDetails.prescription,
             doctorname: `${ele?.userId?.firstname} ${ele?.userId?.lastname}`,
           },
           {
@@ -133,14 +131,6 @@ const BookAppointment = ({ setModalOpen, ele }) => {
               value={formDetails.familyDiseases}
               onChange={inputChange}
             ></textarea>
-            {/* <input
-              type="file"
-              name="prescription"
-              accept="application/pdf"
-              className="form-input"
-              onChange={fileChange}
-            /> */}
-
               <button
                 type="submit"
                 className="btn form-btn"

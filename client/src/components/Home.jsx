@@ -12,12 +12,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import {
-  FaHome,
-  FaList,
-  FaUser,
   FaUserMd,
   FaUsers,
-  FaEnvelope,
 } from "react-icons/fa";
 import Loading from "./Loading";
 import { setLoading } from "../redux/reducers/rootSlice";
@@ -26,9 +22,7 @@ import fetchData from "../helper/apiCall";
 import axios from "axios";
 import "../styles/Home.css";
 import {
-  BsFillArchiveFill,
   BsFillGrid3X3GapFill,
-  BsPeopleFill,
 } from "react-icons/bs";
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
