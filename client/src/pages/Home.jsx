@@ -4,7 +4,7 @@ import AboutUs from "../components/AboutUs";
 import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
-import HomeCircles from "../components/HomeCircles";
+// import HomeCircles from "../components/HomeCircles";
 
 const Home = () => {
   return (
@@ -12,7 +12,7 @@ const Home = () => {
       <Navbar />
       <Hero />
       <AboutUs />
-      <HomeCircles />
+      {/* <HomeCircles /> */}
       <Contact />
       <Footer />
     </>
