@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Doctor = require("../models/doctorModel");
 const Appointment = require("../models/appointmentModel");
+const nodemailer = require("nodemailer");
 const sendGridTransport = require("nodemailer-sendgrid-transport");
 require("dotenv").config();
 
@@ -149,6 +150,7 @@ const forgotpassword = async (req, res) => {
     //     pass: "qfhv wohg gjtf ikvz", 
     //   },
     // });
+    console.log(process.env.SENDGRID_API_KEY);
     const transporter = nodemailer.createTransport(
       sendGridTransport({
         service:'gmail',
@@ -165,12 +167,14 @@ const forgotpassword = async (req, res) => {
     };
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
+        console.log(error);
         return res.status(500).send({ status: "Error sending email" });
       } else {
         return res.status(200).send({ status: "Email sent successfully" });
       }
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).send({ status: "Internal Server Error" });
   }
 };
