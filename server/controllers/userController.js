@@ -143,14 +143,6 @@ const forgotpassword = async (req, res) => {
       return res.status(404).send({ status: "User not found" });
     }
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1m" });
-    // const transporter = nodemailer.createTransport({
-    //   service: "gmail",
-    //   auth: {
-    //     user: "tarun.kumar.csbs25@heritageit.edu.in",
-    //     pass: "qfhv wohg gjtf ikvz", 
-    //   },
-    // });
-    console.log(process.env.SENDGRID_API_KEY);
     const transporter = nodemailer.createTransport(
       sendGridTransport({
         service:'gmail',
@@ -167,14 +159,12 @@ const forgotpassword = async (req, res) => {
     };
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        console.log(error);
         return res.status(500).send({ status: "Error sending email" });
       } else {
         return res.status(200).send({ status: "Email sent successfully" });
       }
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).send({ status: "Internal Server Error" });
   }
 };
