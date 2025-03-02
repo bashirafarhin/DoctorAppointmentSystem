@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Doctor = require("../models/doctorModel");
 const Appointment = require("../models/appointmentModel");
-const nodemailer = require("nodemailer");
+const sendGridTransport = require("nodemailer-sendgrid-transport");
 require("dotenv").config();
 
 const getuser = async (req, res) => {
@@ -142,15 +142,23 @@ const forgotpassword = async (req, res) => {
       return res.status(404).send({ status: "User not found" });
     }
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1m" });
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "tarun.kumar.csbs25@heritageit.edu.in",
-        pass: "qfhv wohg gjtf ikvz", 
-      },
-    });
+    // const transporter = nodemailer.createTransport({
+    //   service: "gmail",
+    //   auth: {
+    //     user: "tarun.kumar.csbs25@heritageit.edu.in",
+    //     pass: "qfhv wohg gjtf ikvz", 
+    //   },
+    // });
+    const transporter = nodemailer.createTransport(
+      sendGridTransport({
+        service:'gmail',
+        auth: {
+          api_key: process.env.SENDGRID_API_KEY,
+        },
+      })
+    );
     const mailOptions = {
-      from: "tarun.kumar.csbs25@heritageit.edu.in",
+      from: "bashira.farhin.ug21@nsut.ac.in",
       to: email,
       subject: "Reset Password Link",
       text: `${process.env.CLIENT_URL}/resetpassword/${user._id}/${token}`,
