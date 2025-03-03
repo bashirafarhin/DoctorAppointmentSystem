@@ -13,7 +13,7 @@ import jwt_decode from "jwt-decode";
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
 function ChangePassword() {
-  const { userId } = jwt_decode(localStorage.getItem("token"));
+  const { userId } = jwt_decode(localStorage.getItem("das-token"));
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.root);
   const [file, setFile] = useState("");
@@ -69,7 +69,7 @@ function ChangePassword() {
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("das-token")}`,
           },
         }
       );

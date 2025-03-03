@@ -15,7 +15,7 @@ const Navbar = () => {
   const [iconActive, setIconActive] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = localStorage.getItem("token") || "";
+  const token = localStorage.getItem("das-token") || "";
   const user = token ? jwt_decode(token) : null;
 
   const{userInfo} = useSelector((state)=>state.root);
@@ -23,7 +23,7 @@ const Navbar = () => {
 
   const logoutFunc = () => {
     dispatch(setUserInfo({}));
-    localStorage.removeItem("token");
+    localStorage.removeItem("das-token");
     navigate("/login");
   }
 

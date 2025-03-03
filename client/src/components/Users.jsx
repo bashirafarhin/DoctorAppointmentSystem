@@ -39,7 +39,7 @@ const Users = () => {
         await toast.promise(
           axios.delete("/user/deleteuser", {
             headers: {
-              authorization: `Bearer ${localStorage.getItem("token")}`,
+              authorization: `Bearer ${localStorage.getItem("das-token")}`,
             },
             data: { userId },
           }),

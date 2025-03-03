@@ -44,7 +44,7 @@ const AdminDoctors = () => {
             { userId },
             {
               headers: {
-                authorization: `Bearer ${localStorage.getItem("token")}`,
+                authorization: `Bearer ${localStorage.getItem("das-token")}`,
               },
             }
           ),

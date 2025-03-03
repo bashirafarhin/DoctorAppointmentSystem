@@ -5,7 +5,7 @@ axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 const fetchData = async (url) => {
   const { data } = await axios.get(url, {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("das-token")}`,
     },
   });
   return data;

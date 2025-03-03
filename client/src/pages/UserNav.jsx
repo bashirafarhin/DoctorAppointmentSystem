@@ -12,16 +12,16 @@ const Navbar = () => {
   const [iconActive, setIconActive] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [token, setToken] = useState(localStorage.getItem("token") || "");
+  const [token, setToken] = useState(localStorage.getItem("das-token") || "");
   const [user, setUser] = useState(
-    localStorage.getItem("token")
-      ? jwt_decode(localStorage.getItem("token"))
+    localStorage.getItem("das-token")
+      ? jwt_decode(localStorage.getItem("das-token"))
       : ""
   );
 
   const logoutFunc = () => {
     dispatch(setUserInfo({}));
-    localStorage.removeItem("token");
+    localStorage.removeItem("das-token");
     navigate("/login");
   };
 

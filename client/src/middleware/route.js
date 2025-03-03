@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
 export const Protected = ({ children }) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("das-token");
   if (!token) {
     return (
       <Navigate
@@ -14,7 +14,7 @@ export const Protected = ({ children }) => {
 };
 
 export const Public = ({ children }) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("das-token");
   if (!token) {
     return children;
   }
@@ -27,7 +27,7 @@ export const Public = ({ children }) => {
 };
 
 export const Admin = ({ children }) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("das-token");
   if (!token) {
     return (
       <Navigate

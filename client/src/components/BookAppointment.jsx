@@ -42,7 +42,7 @@ const BookAppointment = ({ setModalOpen, ele }) => {
           },
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              Authorization: `Bearer ${localStorage.getItem("das-token")}`,
             },
           }
         ),

@@ -53,7 +53,7 @@ function Login() {
   
       toast.dismiss();
       toast.success("Login successful");
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("das-token", data.token);
       dispatch(setUserInfo(jwt_decode(data.token).userId));
       setUserRole(role);
       getUser(jwt_decode(data.token).userId, role);

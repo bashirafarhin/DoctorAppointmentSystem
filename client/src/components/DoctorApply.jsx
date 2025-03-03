@@ -41,7 +41,7 @@ function DoctorApply() {
           },
           {
             headers: {
-              authorization: `Bearer ${localStorage.getItem("token")}`,
+              authorization: `Bearer ${localStorage.getItem("das-token")}`,
             },
           }
         ),

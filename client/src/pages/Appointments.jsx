@@ -17,7 +17,7 @@ const Appointments = () => {
   const PerPage = 5;
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.root);
-  const { userId } = jwt_decode(localStorage.getItem("token"));
+  const { userId } = jwt_decode(localStorage.getItem("das-token"));
 
   const getAllAppoint = async () => {
     try {
@@ -70,7 +70,7 @@ const Appointments = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("das-token")}`,
           },
         }
       );

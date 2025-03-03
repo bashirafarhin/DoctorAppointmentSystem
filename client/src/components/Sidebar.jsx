@@ -52,7 +52,7 @@ const Sidebar = () => {
 
   const logoutFunc = () => {
     dispatch(setUserInfo({}));
-    localStorage.removeItem("token");
+    localStorage.removeItem("das-token");
     navigate("/login");
   };
 

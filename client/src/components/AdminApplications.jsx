@@ -34,7 +34,7 @@ const AdminApplications = () => {
             { id: userId },
             {
               headers: {
-                authorization: `Bearer ${localStorage.getItem("token")}`,
+                authorization: `Bearer ${localStorage.getItem("das-token")}`,
               },
               data: { userId },
             }
@@ -62,7 +62,7 @@ const AdminApplications = () => {
             { id: userId },
             {
               headers: {
-                authorization: `Bearer ${localStorage.getItem("token")}`,
+                authorization: `Bearer ${localStorage.getItem("das-token")}`,
               },
               data: { userId },
             }
