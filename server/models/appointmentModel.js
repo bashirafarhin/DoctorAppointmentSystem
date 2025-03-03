@@ -41,10 +41,6 @@ const schema = mongoose.Schema(
       type: String,
       required: false,
     },
-    // prescription: {
-    //   type: String,
-    //   required: false,
-    // },
     status: {
       type: String,
       default: "Pending",

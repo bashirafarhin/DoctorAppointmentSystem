@@ -29,7 +29,7 @@ const schema = mongoose.Schema(
     },
     age: {
       type: Number,
-      default: "",
+      default: null,
     },
     gender: {
       type: String,
@@ -37,13 +37,9 @@ const schema = mongoose.Schema(
     },
     mobile: {
       type: Number,
-      default: "",
+      default: null,
     },
     address: {
-      type: String,
-      default: "",
-    },
-    status: {
       type: String,
       default: "",
     },
