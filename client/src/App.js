@@ -5,7 +5,7 @@ import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import { Toaster } from "react-hot-toast";
-import { Protected, Public, Admin } from "./middleware/route";
+import { Protected, Public } from "./middleware/route";
 import React, { lazy, Suspense } from "react";
 import Loading from "./components/Loading";
 import Dashboard from "./pages/Dashboard";
@@ -15,7 +15,6 @@ const Appointments = lazy(() => import("./pages/Appointments"));
 const Doctors = lazy(() => import("./pages/Doctors"));
 const Profile = lazy(() => import("./pages/Profile"));
 const Change = lazy(() => import("./pages/ChangePassword"));
-// const DasHome = lazy(() => import("./components/Home"));
 const Notifications = lazy(() => import("./pages/Notifications"));
 const ApplyDoctor = lazy(() => import("./pages/ApplyDoctor"));
 const Error = lazy(() => import("./pages/Error"));
@@ -82,49 +81,49 @@ function App() {
           <Route
             path="/dashboard/home"
             element={
-              <Admin>
+              <Protected>
                 <Dashboard type ={"home"} />
-              </Admin>
+              </Protected>
             }
           />
           <Route
             path="/dashboard/users"
             element={
-              <Admin>
+              <Protected>
                 <Dashboard type={"users"} />
-              </Admin>
+              </Protected>
             }
           />
           <Route
             path="/dashboard/doctors"
             element={
-              <Admin>
+              <Protected>
                 <Dashboard type={"doctors"} />
-              </Admin>
+              </Protected>
             }
           />
           <Route
             path="/dashboard/appointments"
             element={
-              <Admin>
+              <Protected>
                 <Dashboard type={"appointments"} />
-              </Admin>
+              </Protected>
             }
           />
           <Route
             path="/dashboard/applications"
             element={
-              <Admin>
+              <Protected>
                 <Dashboard type={"applications"} />
-              </Admin>
+              </Protected>
             }
           />
           <Route
             path="/dashboard/aprofile"
             element={
-              <Admin>
+              <Protected>
                 <Dashboard type={"aprofile"} />
-              </Admin>
+              </Protected>
             }
           />
           <Route path="*" element={<Error />} />

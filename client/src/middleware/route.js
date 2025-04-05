@@ -5,7 +5,7 @@ export const Protected = ({ children }) => {
   if (!token) {
     return (
       <Navigate
-        to={"/"}
+        to={"/login"}
         replace={true}
       ></Navigate>
     );
@@ -24,17 +24,4 @@ export const Public = ({ children }) => {
       replace={true}
     ></Navigate>
   );
-};
-
-export const Admin = ({ children }) => {
-  const token = localStorage.getItem("das-token");
-  if (!token) {
-    return (
-      <Navigate
-        to={"/"}
-        replace={true}
-      ></Navigate>
-    );
-  }
-  return children;
 };
