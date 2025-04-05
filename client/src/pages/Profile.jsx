@@ -25,8 +25,8 @@ function Profile() {
     mobile: "",
     gender: "neither",
     address: "",
-    password: "",
-    confpassword: "",
+    // password: "",
+    // confpassword: "",
   });
 
   const getUser = async () => {
@@ -35,8 +35,8 @@ function Profile() {
       const temp = await fetchData(`/user/getuser/${userId}`);
       setFormDetails({
         ...temp,
-        password: "",
-        confpassword: "",
+        // password: "",
+        // confpassword: "",
         mobile: temp.mobile === null ? "" : temp.mobile,
         age: temp.age === null ? "" : temp.age,
       });
@@ -71,8 +71,8 @@ function Profile() {
         mobile,
         address,
         gender,
-        password,
-        confpassword,
+        // password,
+        // confpassword,
       } = formDetails;
 
       if (!email) {
@@ -81,11 +81,12 @@ function Profile() {
         return toast.error("First name must be at least 3 characters long");
       } else if (lastname.length < 3) {
         return toast.error("Last name must be at least 3 characters long");
-      } else if (password.length < 5) {
-        return toast.error("Password must be at least 5 characters long");
-      } else if (password !== confpassword) {
-        return toast.error("Passwords do not match");
       }
+      //  else if (password.length !=0 && password.length < 5) {
+      //   return toast.error("Password must be at least 5 characters long");
+      // } else if (password.length !=0 && password !== confpassword) {
+      //   return toast.error("Passwords do not match");
+      // }
       await toast.promise(
         axios.put(
           "/user/updateprofile",
@@ -97,7 +98,7 @@ function Profile() {
             address,
             gender,
             email,
-            password,
+            // password,
           },
           {
             headers: {
@@ -113,7 +114,7 @@ function Profile() {
         }
       );
 
-      setFormDetails({ ...formDetails, password: "", confpassword: "" });
+      setFormDetails({ ...formDetails });
     } catch (error) {
       return toast.error("Unable to update profile");
     }
@@ -203,7 +204,7 @@ function Profile() {
                 onChange={inputChange}
                 rows="2"
               ></textarea>
-              <div className="form-same-row">
+              {/* <div className="form-same-row">
                 <input
                   type="password"
                   name="password"
@@ -220,7 +221,7 @@ function Profile() {
                   value={formDetails.confpassword}
                   onChange={inputChange}
                 />
-              </div>
+              </div> */}
               <button
                 type="submit"
                 className="btn form-btn"

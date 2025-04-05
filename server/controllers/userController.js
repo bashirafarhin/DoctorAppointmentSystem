@@ -96,10 +96,9 @@ const register = async (req, res) => {
 
 const updateprofile = async (req, res) => {
   try {
-    const hashedPass = await bcrypt.hash(req.body.password, 10);
     const result = await User.findByIdAndUpdate(
       { _id: req.locals },
-      { ...req.body, password: hashedPass }
+      { ...req.body }
     );
     if (!result) {
       return res.status(500).send("Unable to update user");
