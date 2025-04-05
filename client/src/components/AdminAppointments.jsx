@@ -28,35 +28,6 @@ const AdminAppointments = () => {
     getAllAppoint();
   }, []);
 
-  const complete = async (ele) => {
-    try {
-      await toast.promise(
-        axios.put(
-          "/appointment/completed",
-          {
-            appointid: ele?._id,
-            doctorId: ele?.doctorId._id,
-            doctorname: `${ele?.userId?.firstname} ${ele?.userId?.lastname}`,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("das-token")}`,
-            },
-          }
-        ),
-        {
-          success: "Appointment booked successfully",
-          error: "Unable to book appointment",
-          loading: "Booking appointment...",
-        }
-      );
-
-      getAllAppoint();
-    } catch (error) {
-      return error;
-    }
-  };
-
   return (
     <>
       {loading ? (
@@ -109,17 +80,8 @@ const AdminAppointments = () => {
                         <td>{ele?.createdAt.split("T")[0]}</td>
                         <td>{ele?.updatedAt.split("T")[1].split(".")[0]}</td>
                         <td>{ele?.status}</td>
-                        {/* <td>
-                          <button
-                            className={`btn user-btn accept-btn ${
-                              ele?.status === "Completed" ? "disable-btn" : ""
-                            }`}
-                            disabled={ele?.status === "Completed"}
-                            onClick={() => complete(ele)}
-                          >
-                            Complete
-                          </button>
-                        </td> */}
+                        <td>
+                        </td>
                       </tr>
                     );
                   })}

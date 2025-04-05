@@ -114,7 +114,7 @@ const Appointments = () => {
                       <td>{(currentPage - 1) * PerPage + index + 1}</td>
                       <td>{`${appointment.doctorId.firstname} ${appointment.doctorId.lastname}`}</td>
                       <td>{`${appointment.userId.firstname} ${appointment.userId.lastname}`}</td>
-                      <td>{appointment.age}</td> 
+                      <td>{appointment.age}</td>
                       <td>{appointment.gender}</td>
                       <td>{appointment.number}</td>
                       <td>{appointment.bloodGroup}</td>
@@ -122,12 +122,25 @@ const Appointments = () => {
                       <td>{appointment.date}</td>
                       <td>{appointment.status}</td>
                       <td>
-                        <button
+                        {/* <button
                           className="btn user-btn complete-btn"
                           onClick={() => completeAppointment(appointment)}
                           disabled={appointment.status === "Completed"}
                         >
                           Complete
+                        </button> */}
+                        <button
+                          className={`btn user-btn ${
+                            appointment?.status === "Completed"
+                              ? "disable-btn grey-btn"
+                              : "accept-btn green-btn"
+                          }`}
+                          disabled={appointment?.status === "Completed"}
+                          onClick={() => completeAppointment(appointment)}
+                        >
+                          {appointment?.status === "Completed"
+                            ? "Completed"
+                            : "Complete"}
                         </button>
                       </td>
                     </tr>
