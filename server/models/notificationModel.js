@@ -7,10 +7,6 @@ const schema = mongoose.Schema(
       ref: "User",
       required: true,
     },
-    isRead: {
-      type: Boolean,
-      default: false,
-    },
     content: {
       type: String,
       default: "",

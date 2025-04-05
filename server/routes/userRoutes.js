@@ -19,7 +19,6 @@ userRouter.put("/updateprofile", auth, userController.updateprofile);
 
 userRouter.put("/changepassword", auth, userController.changepassword);
 
-
 userRouter.delete("/deleteuser", auth, userController.deleteuser);
 
 

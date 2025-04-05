@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const path = require("path");
 require("dotenv").config();
 require("./db/conn");
 const userRouter = require("./routes/userRoutes");
@@ -17,12 +16,6 @@ app.use("/api/user", userRouter);
 app.use("/api/doctor", doctorRouter);
 app.use("/api/appointment", appointRouter);
 app.use("/api/notification", notificationRouter);
-// app.use(express.static(path.join(__dirname, "../client/build")));
-
-
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../client/build/index.html"));
-// });
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

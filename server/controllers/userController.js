@@ -45,7 +45,6 @@ const getallusers = async (req, res) => {
   }
 };
 
-
 const login = async (req, res) => {
   try {
     const emailPresent = await User.findOne({ email: req.body.email });
@@ -63,7 +62,7 @@ const login = async (req, res) => {
       return res.status(400).send("Incorrect credentials");
     }
     const token = jwt.sign(
-      { userId: emailPresent._id, isAdmin: emailPresent.isAdmin, role:emailPresent.role },
+      { userId: emailPresent._id, role:emailPresent.role },
       process.env.JWT_SECRET,
       {
         expiresIn: "2 days",

@@ -44,15 +44,10 @@ const bookappointment = async (req, res) => {
     const user = await User.findById(req.locals);
     const doctornotification = Notification({
       userId: req.body.doctorId,
-      content: `You have an appointment with ${user.firstname} ${user.lastname} on ${req.body.date} at ${req.body.time} Age: ${user.age} bloodGropu: ${user.bloodGroup} Gender: ${user.gender} Mobile Number:${user.number} Family Diseases ${user.familyDiseases}` ,
+      content: `You have an appointment with ${user.firstname} ${user.lastname} on ${req.body.date} at ${req.body.time} Age: ${user.age} bloodGropu: ${user.bloodGroup} Gender: ${user.gender} Mobile Number:${user.number} Family Diseases ${user.familyDiseases}`,
     });
 
     await doctornotification.save();
-  // Increment numOfAppointments for the doctor
-  await Doctor.findOneAndUpdate(
-    { userId: req.body.doctorId },
-    { $inc: { numOfAppointments: 1 } }
-  );
     const result = await appointment.save();
     return res.status(201).send(result);
   } catch (error) {
@@ -62,9 +57,15 @@ const bookappointment = async (req, res) => {
 
 const completed = async (req, res) => {
   try {
-    const alreadyFound = await Appointment.findOneAndUpdate(
+    await Appointment.findOneAndUpdate(
       { _id: req.body.appointid },
       { status: "Completed" }
+    );
+
+    // Increment numOfAppointments for the doctor
+    await Doctor.findOneAndUpdate(
+      { userId: req.body.doctorId },
+      { $inc: { numOfAppointments: 1 } }
     );
 
     const usernotification = Notification({
