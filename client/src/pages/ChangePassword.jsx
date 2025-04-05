@@ -36,6 +36,8 @@ function ChangePassword() {
       dispatch(setLoading(false));
     } catch (error) {
       console.error("Error fetching user data:", error);
+      dispatch(setLoading(false));
+      toast.error("Unable to fetch user details");
     }
   };
 

@@ -29,7 +29,10 @@ const Users = () => {
       const temp = await fetchData(url);
       setUsers(temp);
       dispatch(setLoading(false));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(setLoading(false));
+      toast.error("Unable to fetch users");
+    }
   };
 
   const deleteUser = async (userId) => {

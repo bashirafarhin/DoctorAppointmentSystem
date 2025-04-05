@@ -40,7 +40,10 @@ function Aprofile() {
       });
       setFile(temp.pic);
       dispatch(setLoading(false));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(setLoading(false));
+      toast.error("Unable to fetch user details");
+    }
   };
 
   useEffect(() => {
@@ -107,7 +110,6 @@ function Aprofile() {
           loading: "Updating profile...",
         }
       );
-
       setFormDetails({ ...formDetails, password: "", confpassword: "" });
     } catch (error) {
       return toast.error("Unable to update profile");

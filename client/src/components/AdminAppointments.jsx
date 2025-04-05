@@ -21,7 +21,10 @@ const AdminAppointments = () => {
       const temp = await fetchData(`/appointment/getallappointments`);
       setAppointments(temp);
       dispatch(setLoading(false));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(setLoading(false));
+      toast.error("Unable to fetch appointments");
+    }
   };
 
   useEffect(() => {

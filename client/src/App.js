@@ -15,7 +15,7 @@ const Appointments = lazy(() => import("./pages/Appointments"));
 const Doctors = lazy(() => import("./pages/Doctors"));
 const Profile = lazy(() => import("./pages/Profile"));
 const Change = lazy(() => import("./pages/ChangePassword"));
-const DasHome = lazy(() => import("./components/Home"));
+// const DasHome = lazy(() => import("./components/Home"));
 const Notifications = lazy(() => import("./pages/Notifications"));
 const ApplyDoctor = lazy(() => import("./pages/ApplyDoctor"));
 const Error = lazy(() => import("./pages/Error"));

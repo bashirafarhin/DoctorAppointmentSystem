@@ -42,7 +42,10 @@ function Profile() {
       });
       setFile(temp.pic);
       dispatch(setLoading(false));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(setLoading(false));
+      toast.error("Unable to fetch user details");
+    }
   };
 
   useEffect(() => {

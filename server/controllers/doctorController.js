@@ -18,17 +18,13 @@ const getalldoctors = async (req, res) => {
 
     const filteredDoctors = doctors.filter((doc) => {
       const { userId, specialization } = doc;
-
       if (!userId) return false;
-
       if (filter === "firstname") {
         return userId.firstname?.toLowerCase().includes(searchLower);
       }
-
       if (filter === "specialization") {
         return specialization?.toLowerCase().includes(searchLower);
       }
-
       // If filter is 'all', search across multiple fields
       return (
         userId.firstname?.toLowerCase().includes(searchLower) ||

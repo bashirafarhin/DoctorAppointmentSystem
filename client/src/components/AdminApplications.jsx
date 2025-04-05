@@ -21,7 +21,10 @@ const AdminApplications = () => {
       const temp = await fetchData(`/doctor/getnotdoctors`);
       setApplications(temp);
       dispatch(setLoading(false));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(setLoading(false));
+      toast.error("Unable to fetch applications");
+    }
   };
 
   const acceptUser = async (userId) => {

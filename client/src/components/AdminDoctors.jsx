@@ -68,23 +68,6 @@ const AdminDoctors = () => {
     getAllDoctors();
   }, [searchTerm, filter]);
 
-  const filteredDoctors = doctors.filter((doc) => {
-    if (filter === "all") {
-      return true;
-    } else if (filter === "specialization") {
-      return doc.specialization
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-    } else if (filter === "firstname") {
-      return (
-        doc.userId &&
-        doc.userId.firstname.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    } else {
-      return true;
-    }
-  });
-
   return (
     <>
       {loading ? (
@@ -118,7 +101,7 @@ const AdminDoctors = () => {
             </div>
           </div>
           <h3 className="home-sub-heading">All Doctors</h3>
-          {filteredDoctors.length > 0 ? (
+          {doctors.length > 0 ? (
             <div className="user-container">
               <table>
                 <thead>
@@ -137,7 +120,7 @@ const AdminDoctors = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredDoctors.map((ele, i) => {
+                  {doctors.map((ele, i) => {
                     return (
                       <tr key={ele?._id}>
                         <td>{i + 1}</td>
