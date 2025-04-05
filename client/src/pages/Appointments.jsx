@@ -122,13 +122,6 @@ const Appointments = () => {
                       <td>{appointment.date}</td>
                       <td>{appointment.status}</td>
                       <td>
-                        {/* <button
-                          className="btn user-btn complete-btn"
-                          onClick={() => completeAppointment(appointment)}
-                          disabled={appointment.status === "Completed"}
-                        >
-                          Complete
-                        </button> */}
                         <button
                           className={`btn user-btn ${
                             appointment?.status === "Completed"

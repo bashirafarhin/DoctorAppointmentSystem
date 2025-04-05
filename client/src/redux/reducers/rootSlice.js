@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import jwtDecode from "jwt-decode";
 
-export const rootReducer = createSlice({
+export const rootSlice = createSlice({
   name: "root",
   initialState: {
     loading: true,
     userInfo: localStorage.getItem("das-token") ? jwtDecode(localStorage.getItem("das-token")) : null,
+    error: null,
   },
   reducers: {
     setLoading: (state, action) => {
@@ -14,8 +15,11 @@ export const rootReducer = createSlice({
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
     },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
   },
 });
 
-export const { setLoading, setUserInfo } = rootReducer.actions;
-export default rootReducer.reducer;
+export const { setLoading, setUserInfo, setError } = rootSlice.actions;
+export default rootSlice.reducer;
