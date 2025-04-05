@@ -31,7 +31,10 @@ const AdminDoctors = () => {
       const temp = await fetchData(url);
       setDoctors(temp);
       dispatch(setLoading(false));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(setLoading(false));
+      toast.error("Unable to fetch doctors");
+    }
   };
 
   const deleteUser = async (userId) => {
@@ -63,7 +66,7 @@ const AdminDoctors = () => {
 
   useEffect(() => {
     getAllDoctors();
-  }, []);
+  }, [searchTerm, filter]);
 
   const filteredDoctors = doctors.filter((doc) => {
     if (filter === "all") {

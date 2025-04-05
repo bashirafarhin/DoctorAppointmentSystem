@@ -5,21 +5,45 @@ const Appointment = require("../models/appointmentModel");
 
 const getalldoctors = async (req, res) => {
   try {
-    let docs;
-    if (!req.locals) {
-      docs = await Doctor.find({ isDoctor: true }).populate("userId");
-    } else {
-      docs = await Doctor.find({ isDoctor: true })
-        .find({
-          _id: { $ne: req.locals },
-        })
-        .populate("userId");
+    const { filter = "all", search = "" } = req.query;
+    const query = { isDoctor: true };
+    const doctors = await Doctor.find(query).populate("userId");
+
+    const searchLower = search.trim().toLowerCase();
+
+    // If there's no search term, return all doctors
+    if (!searchLower) {
+      return res.send(doctors);
     }
-    return res.send(docs);
+
+    const filteredDoctors = doctors.filter((doc) => {
+      const { userId, specialization } = doc;
+
+      if (!userId) return false;
+
+      if (filter === "firstname") {
+        return userId.firstname?.toLowerCase().includes(searchLower);
+      }
+
+      if (filter === "specialization") {
+        return specialization?.toLowerCase().includes(searchLower);
+      }
+
+      // If filter is 'all', search across multiple fields
+      return (
+        userId.firstname?.toLowerCase().includes(searchLower) ||
+        userId.lastname?.toLowerCase().includes(searchLower) ||
+        userId.email?.toLowerCase().includes(searchLower) ||
+        specialization?.toLowerCase().includes(searchLower)
+      );
+    });
+
+    return res.send(filteredDoctors);
   } catch (error) {
-    res.status(500).send("Unable to get doctors");
+    return res.status(500).send("Unable to get doctors");
   }
 };
+
 
 const getnotdoctors = async (req, res) => {
   try {
