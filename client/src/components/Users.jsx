@@ -62,17 +62,7 @@ const Users = () => {
 
   useEffect(() => {
     getAllUsers();
-  }, []);
-
-  const filteredUsers = users.filter((doc) => {
-    if (filter === "all") {
-      return true;
-    } else if (filter === "firstname") {
-      return doc.firstname.toLowerCase().includes(searchTerm.toLowerCase());
-    } else {
-      return true;
-    }
-  });
+  }, [ filter, searchTerm ]);
 
   return (
     <>
@@ -89,7 +79,9 @@ const Users = () => {
                 onChange={(e) => setFilter(e.target.value)}
               >
                 <option value="all">All</option>
-                <option value="firstname">Name</option>
+                <option value="firstname">Firstname</option>
+                <option value="lastname">Lastname</option>
+                <option value="email">Email</option>
 
               </select>
             </div>
@@ -125,7 +117,7 @@ const Users = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredUsers.map((ele, i) => (
+                  {users.map((ele, i) => (
                     <tr key={ele._id}>
                       <td>{i + 1}</td>
                       <td>

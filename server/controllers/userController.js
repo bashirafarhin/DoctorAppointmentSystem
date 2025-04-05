@@ -18,14 +18,33 @@ const getuser = async (req, res) => {
 
 const getallusers = async (req, res) => {
   try {
-    const users = await User.find()
-      .find({ _id: { $ne: req.locals } })
-      .select("-password");
-    return res.send(users);
+    const { filter, search } = req.query;
+    let query = {};
+    if (search && search.trim() !== "") {
+      const searchRegex = new RegExp(search, "i");
+      if (filter === "firstname") {
+        query.firstname = { $regex: searchRegex };
+      } else if (filter === "lastname") {
+        query.lastname = { $regex: searchRegex };
+      } else if (filter === "email") {
+        query.email = { $regex: searchRegex };
+      } else {
+        // Search across multiple fields if no specific filter
+        query.$or = [
+          { firstname: { $regex: searchRegex } },
+          { lastname: { $regex: searchRegex } },
+          { email: { $regex: searchRegex } },
+        ];
+      }
+    }
+    const users = await User.find(query).select("-password");
+    return res.status(200).send(users);
   } catch (error) {
-    res.status(500).send("Unable to get all users");
+    console.error(error);
+    return res.status(500).send("Unable to get all users");
   }
 };
+
 
 const login = async (req, res) => {
   try {
